@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-hola
+holaa
 <a href="index.php?r=login">Login</a>
 <a href="index.php?r=register">Register</a>
 
