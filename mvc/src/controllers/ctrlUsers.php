@@ -4,8 +4,8 @@
 function ctrlUsersView($request,  $response,$container){
 
 
-    $logged = $request->get("SESSION","logged");
-    $response->set("logged",$logged);
+    $identified = $request->get("SESSION","identified");
+    $response->set("identified",$identified);
     
     $response->setTemplate("users.php");
     return $response;

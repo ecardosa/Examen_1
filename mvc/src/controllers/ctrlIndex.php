@@ -7,12 +7,12 @@ function ctrlIndex($request, $response, $container){
     $response->set("name", $name);
 
 
-    $logged = $request->get("SESSION","logged");
+    $identified = $request->get("SESSION","identified");
     $tipo="";
     $response->set("tipo",$tipo);
 
-    $response->set("logged",$logged);
-    $response->set("user",$logged);
+    $response->set("identified",$identified);
+    $response->set("user",$identified);
     $response->setTemplate("index.php");
 
     

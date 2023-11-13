@@ -11,7 +11,7 @@ class Users {
     }
 
     public function getAll($ID_Usuari) {
-        $stm = $this->sql->prepare('SELECT * FROM usuari WHERE ID_Usuari = :ID_Usuari;');
+        $stm = $this->sql->prepare('SELECT * FROM inscripciones WHERE id = :ID_Usuari;');
         $stm->execute([':ID_Usuari' => $ID_Usuari]);
         $result = $stm->fetch(\PDO::FETCH_ASSOC);
 
@@ -21,6 +21,20 @@ class Users {
             false;
         }
     }
+
+    public function getAllUsers() {
+        $stm = $this->sql->prepare('SELECT * FROM inscripciones;');
+        $stm->execute();
+        $result = $stm->fetchAll(\PDO::FETCH_ASSOC);
+
+        if($result){
+            return $result;
+        } else {
+            false;
+        }
+    }
+
+    
     public function updateUser($ID_Usuari, $name, $lastname, $phone, $email, $pass) {
         $sql = 'UPDATE usuari 
                 SET Nom = :name, Cognoms = :lastname, Telefon = :phone, Email = :email, pass = :pass
@@ -37,7 +51,16 @@ class Users {
         ]);
     }
     
-    
+    public function getLastId(){
+        $stm = $this->sql->prepare("SELECT MAX(id) AS last_id FROM inscripciones;");
+        $stm->execute();
+        $result = $stm->fetch(\PDO::FETCH_ASSOC);
+        if($result && isset($result['last_id'])){
+            return $result['last_id'];
+        } else {
+            return null;
+        }
+    }
     
 
     public function login($email, $pass) {
@@ -53,28 +76,20 @@ class Users {
     }
     
 
-    public function register($name, $lastname, $phone, $mail, $cardnumber, $pass) {
-        // Verificar si el correo electrónico ya está registrado
-        $checkStmt = $this->sql->prepare('SELECT * FROM usuari WHERE Email = :mail');
-        $checkStmt->execute([':mail' => $mail]);
+    public function register($name, $lastname, $date, $calle, $num, $city, $cp) {
     
-        // Obtener el número de filas afectadas por la consulta SELECT
-        $emailExists = $checkStmt->rowCount();
     
-        // Si el correo electrónico ya está registrado, devuelve un mensaje de error
-        if ($emailExists > 0) {
-            return "El correo electrónico ya está registrado.";
-        }
     
         // Si el correo electrónico no está registrado, procede con la inserción
-        $insertStmt = $this->sql->prepare('INSERT INTO usuari (Nom, Cognoms, Telefon, Email, Tarjeta, Rol, pass) VALUES (:n, :lastname, :phone, :mail, :cardnumber,"Normal" , :pass );');
+        $insertStmt = $this->sql->prepare('INSERT INTO inscripciones (nombre, apellidos, fecha_nacimiento, calle, numero, ciudad, postal) VALUES (:n, :lastname, :date, :calle, :num, :city, :cp);');
         $result = $insertStmt->execute([
             ':n' => $name,
             ':lastname' => $lastname,
-            ':phone' => $phone,
-            ':mail' => $mail,
-            ':cardnumber' => $cardnumber,
-            ':pass' => $pass
+            ':date' => $date,
+            ':calle' => $calle,
+            ':num' => $num,
+            ':city' => $city,
+            ':cp' => $cp
         ]);
    
     }
