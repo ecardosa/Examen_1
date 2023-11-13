@@ -173,19 +173,15 @@ if (isset($_SESSION["loginError"])) {
 ?>
 <form action="index.php" method="post" class="form">
 <input type="hidden" name="r" value="dologin">
-    <p class="title">Iniciar sesión </p>
-    <p class="message">Inicia sesión para tener total acceso en nuestra página. </p>           
-    <label>
-        <input required="" placeholder="" name="email" type="email" class="input">
-        <span>Email</span>
+    <p class="title">Introdueix el codi per entrar</p>
+    <label for="codigo">
+        <input required="" placeholder="" id="codigo" name="codi" type="password" class="input">
+        <span>Codi</span>
     </label>  
-    <label>
-        <input required="" placeholder="" name="pass" type="password" class="input">
-        <span>Contraseña</span>
-    </label>
+   
 
-    <p class="signin">¿Aún no tienes una cuenta? <a href="index.php?r=register">Registrarse</a> </p>
-    <button class="submit">Continuar</button>
+    <p class="signin"><a href="index.php">Torna a la pàgina principal</a> </p>
+    <button class="submit">Confirmar</button>
 </form>
             </container>
             

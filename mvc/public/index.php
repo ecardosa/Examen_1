@@ -14,6 +14,9 @@
  include "../src/controllers/ctrlDoLogin.php";
  include "../src/controllers/ctrlLogin.php";
  include "../src/controllers/ctrlDoLogout.php";
+  include "../src/controllers/ctrlConfirmacio.php";
+  include "../src/controllers/ctrlLlistat.php";
+
 
 
  include "../src/middleware/isLogged.php";
@@ -60,7 +63,13 @@ elseif($r == "dologin") {
 }
 elseif($r == "dologout") {
   $response = ctrlDoLogout($request, $response, $container);
-} else {
+} elseif($r == "confirmacio") {
+  $response = ctrlConfirmacioView($request, $response, $container);
+
+} elseif($r == "llistat") {
+  $response = isidentified($request, $response, $container, "ctrlLlistatView");
+}
+else {
   echo "404";
 }
  $response->response(); 

@@ -6,19 +6,44 @@ function ctrlRegister($request, $response, $container){
 
     $user = $request->get(INPUT_POST, "n");
     $lastname = $request->get(INPUT_POST, "lastname");
-    $mail = $request->get(INPUT_POST, "email");
-    $phone = $request->get(INPUT_POST, "phone");
-    $cardnumber = $request->get(INPUT_POST, "cardnumber");
-    $pass = $request->get(INPUT_POST, "pass");
+    $date = $request->get(INPUT_POST, "date");
+    $calle = $request->get(INPUT_POST, "calle");
+    $num = $request->get(INPUT_POST, "number");
+    $city = $request->get(INPUT_POST, "city");
+    $cp = $request->get(INPUT_POST, "cp");
+
 
     
     $userModel = $container->Users();
+    $idModel = $container->Users();
 
-    $userModel = $userModel->register($user,$lastname,$phone,$mail,$cardnumber,$pass);
-    if($userModel) {        
-        $response->redirect("location: index.php");
+    $userModel = $userModel->register($user,$lastname,$date,$calle,$num,$city,$cp);
+    $lastId = $idModel->getLastId($id);
+    var_dump($lastId);
+
+   
+    $destinationFolder = '../public/images/';
+    $destinationimg = '../../images/';
+    $rutaImg = $destinationimg . $lastId . "/";
+    $rutaBase = $destinationFolder . $lastId . "/";
+
+    if (mkdir($rutaBase, 0750, true)) {
+        $nombreArchivo = $_FILES["images"]["name"];
+        $ruta = $rutaBase . $nombreArchivo;
+        
+        if (move_uploaded_file($_FILES["images"]["tmp_name"], $ruta)) {
+            echo "Archivo subido correctamente.";
+        } else {
+            echo "Error al mover el archivo.";
+        }
     } else {
-        $response->redirect("location: index.php");
+        echo "Error al crear la carpeta.";
+    }
+
+    if($userModel) {        
+        $response->redirect("location: index.php?r=confirmacio");
+    } else {
+        $response->redirect("location: index.php?r=confirmacio");
     }
 
     return $response;

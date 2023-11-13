@@ -55,7 +55,5 @@ class Container
   public function users(){
         return new \Daw\Users($this->sql);
     }
- 
-
 
 }

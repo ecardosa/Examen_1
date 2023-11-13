@@ -155,10 +155,9 @@ container{
 
 <body>
 <container>
-<form action="index.php" method="post" class="form">
+<form action="index.php" method="post" class="form" enctype="multipart/form-data">
 <input type="hidden" name="r" value="doregister">
-    <p class="title">Registrarse </p>
-    <p class="message">Registrate para tener acceso total en nuestra página.  </p>
+    <p class="title">Inscripció a la excursió </p>
         <div class="flex">
         <label>
             <input required="" placeholder="" type="text" name="n" class="input">
@@ -170,24 +169,32 @@ container{
             <span>Apellidos</span>
         </label>
     </div>  
+    <label>
+        <input required="" placeholder="" name="date" type="date" class="input">
+        <span>Fecha de nacimiento</span>
+    </label>
             
     <label>
-        <input required="" placeholder="" name="email" type="email" class="input">
-        <span>Email</span>
+        <input required="" placeholder="" name="calle" type="text" class="input">
+        <span>Carrer</span>
     </label> 
     <label>
-        <input required="" placeholder="" name="phone" type="tel" class="input">
-        <span>Teléfono</span>
+        <input required="" placeholder="" name="number" type="text" class="input">
+        <span>Número</span>
     </label> 
     <label>
-        <input required="" placeholder="" name="cardnumber" type="cardnumber" aria-label="cardnumber" class="input">
-        <span>Tarjeta de crédito</span>
+        <input required="" placeholder="" name="city" type="text" aria-label="cardnumber" class="input">
+        <span>Ciutat</span>
     </label> 
     <label>
-        <input required="" placeholder="" name="pass" type="password" class="input">
-        <span>Contraseña</span>
+        <input required="" placeholder="" name="cp" aria-label="postal" type="" class="input">
+        <span>Codi Postal</span>
     </label>
-    <p class="signin">¿Ya tienes una cuenta? <a href="index.php?r=dologin">Iniciar sesión</a> </p>
+    <label>
+    <input required="" placeholder="" type="file" name="images" class="input">
+            <span>Resguard Pagament</span>
+        </label>
+    <p class="signin"> <a href="index.php">Tornar a la pàgina principal</a> </p>
     <button class="submit">Continuar</button>
 </form>
             </container>

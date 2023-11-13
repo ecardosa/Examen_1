@@ -2,24 +2,19 @@
 
 function ctrlDoLogin($request, $response, $container){
 
-    $email = $request->get(INPUT_POST, "email");
-    $pass = $request->get(INPUT_POST, "pass");
+    $codi = $request->get(INPUT_POST, "codi");
+    
+   
+    if($codi == "123") {
 
-    $userModel = $container->users();
+        $response->setSession("identified", true);
+        echo json_encode(["success" => true, "redirect" => "index.php?r=llistat"]);
+        $response->redirect("location: index.php?r=llistat");
 
-    $userModel = $userModel->login($email, $pass);
-    if($userModel) {
-
-        $response->setSession("user", $userModel);
-        $response->setSession("logged", true);
-         $response->redirect("location: index.php");
-     
     } else {
-        $response->setSession("loginError", "Usuario o contraseña incorrectos");
-        $response->redirect("location: index.php?r=login");
+        echo json_encode(["success" => false, "error" => "Codi Incorrecte"]);
     }
 
-    
     return $response;
 }
 

@@ -1,12 +1,12 @@
 <?php
 
 
-function isLogged($request, $response, $container, $next){
+function isidentified($request, $response, $container, $next){
 
-    $logged = $request->get("SESSION", "logged");
+    $identified = $request->get("SESSION", "identified");
 
-    if(!$logged) {
-        $response->redirect("location: index.php?r=login");
+    if(!$identified) {
+        $response->redirect("location: index.php?r=llistat");
         return $response;
     }
 
