@@ -1,3 +1,9 @@
+new DataTable('#table', {
+    searchable: true,
+    fixedHeight: true
+});
+
+
 $(document).ready(function() {
     $("#formIdentificacion").submit(function(e) {
         e.preventDefault();
