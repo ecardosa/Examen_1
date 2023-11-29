@@ -67,7 +67,7 @@ elseif($r == "dologout") {
   $response = ctrlConfirmacioView($request, $response, $container);
 
 } elseif($r == "llistat") {
-  $response = isidentified($request, $response, $container, "ctrlLlistatView");
+  $response = ctrlLlistatView($request, $response, $container);
 }
 else {
   echo "404";
