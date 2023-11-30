@@ -43,7 +43,7 @@ function ctrlRegister($request, $response, $container){
     if($userModel) {        
         $response->redirect("location: index.php?r=confirmacio");
     } else {
-        $response->redirect("location: index.php?r=confirmacio");
+        echo json_encode(["success" => false, "error" => "Codi Incorrecte"]);
     }
 
     return $response;

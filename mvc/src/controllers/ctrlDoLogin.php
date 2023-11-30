@@ -1,20 +1,25 @@
 <?php
-
-function ctrlDoLogin($request, $response, $container){
-
-    $codi = $request->get(INPUT_POST, "codi");
-    
-   
-    if($codi == "123") {
-
-        $response->setSession("identified", true);
-        echo json_encode(["success" => true, "redirect" => "index.php?r=llistat"]);
-        $response->redirect("location: index.php?r=llistat");
-
-    } else {
-        echo json_encode(["success" => false, "error" => "Codi Incorrecte"]);
-    }
-
-    return $response;
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
+function ctrlDoLogin($request, $response, $container)
+{
+    $contrasenyaCorrecta = '123';
+
+if (isset($_POST['password'])) {
+    $passwordIngresada = $_POST['password'];
+
+    if ($passwordIngresada === $contrasenyaCorrecta) {
+        $_SESSION['identified'] = true;
+        
+        echo 'success';
+    } else {
+        echo 'error';
+    }
+} else {
+    echo 'error';
+}
+die();
+
+}
